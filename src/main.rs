@@ -1,35 +1,39 @@
-use std::io; // imports
-use rand::Rng;
+#![no_std]
+#![no_main]
 
-fn main() { // função
-    println!("heheboy"); // imprimir "heheboy" em uma nova linha
+use core::arch::asm;
 
-    println!("your number input:");
-    let (mut input, mut y) = (String::new(), 10); // declarar variaveis tipo string e númerica. "mut" vem de 'mutavel'
-    const VALUE: u32 = 15;
-    let secret_number = rand::thread_rng().gen_range(1..=100); // gerar um número entre 1 e 100 e salvar em 'secret_number'
+#[panic_handler]
+fn panic(_info: &core::panic::PanicInfo) -> ! {
+    loop {}
+}
 
-    io::stdin()
-        .read_line(&mut input) // criar um input e salvar na variavel 'input'
-        .expect("failed to read line"); // caso não seja possivel ler o input
-    
-    let _input: u32 = input // u32 se define como somente númerico
-        .trim() // remove do input, elementos de whitespace como "/n" ou espaço
-        .parse() // converte a string para um número
-        .expect("please type a number!"); // o que será imprimido caso o valor de input não corresponder ao tipo solicitado
-    
-    println!("Your input was: {input}"); // imprimir o valor do input
-    println!("10 + 15 = {}", y + VALUE); // imprimir uma variavel de outra forma (mais similar ao C)
-    println!("the random number was: {secret_number}");
+#[no_mangle]
+pub extern "C" fn _start() {
+    // Código para imprimir a mensagem
+    unsafe {
+        let msg = b"Hello, World!";
+        let size = msg.len();
+        let fd = 1; // stdout
 
-    loop {
-        y += 1;
-        print!("{y}");
-        if y == 100 {
-            print!("\n");
-            break
-        } else {
-            print!("-");
+        let syscall_ret: u64;
+        asm!(
+            "mov rax, 1",      // sys_write
+            "mov rdi, {}",     // file descriptor
+            "mov rsi, {}",     // endereço da mensagem
+            "mov rdx, {}",     // tamanho da mensagem
+            "syscall",
+            in(reg) fd,
+            in(reg) msg.as_ptr(),
+            in(reg) size,
+            out("rax") syscall_ret,
+            options(nostack, preserves_flags)
+        );
+
+        if syscall_ret != size as u64 {
+            loop {}
         }
+
+        loop {}
     }
 }

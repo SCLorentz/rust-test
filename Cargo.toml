@@ -4,4 +4,17 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-rand = "0.8.5"
+bare-metal = "1.0.0"
+
+[profile.dev]
+panic = "abort"
+codegen-units = 1
+linker-flavor = "ld.lld"
+
+[profile.release]
+panic = "abort"
+linker-flavor = "ld.lld"
+
+[[bin]]
+name = "rust_project"
+path = "src/main.rs"
