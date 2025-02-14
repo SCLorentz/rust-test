@@ -13,7 +13,7 @@ pub fn exit(code: u8) -> ! {
 #[cfg(target_arch = "aarch64")]
 pub fn write<const N: usize>(_text: String<N>)
 {
-    exit(1)
+    todo!();
 }
 
 #[cfg(target_arch = "x86_64")]

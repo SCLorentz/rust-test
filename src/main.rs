@@ -1,8 +1,8 @@
-#![cfg_attr(not(feature = "std"), no_std)]
+#![no_std]
 #![no_main]
 
-mod basic;
-use basic::*;
+mod functions;
+use functions::*;
 
 mod string;
 use string::*;

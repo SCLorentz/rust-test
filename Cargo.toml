@@ -17,13 +17,6 @@ linker-flavor = "ld.lld"
 
 [profile.release]
 panic = "abort"
-target = "x86_64-unknown-linux-gnu"
-linker-flavor = "ld.lld"
-
-[profile.arm]
-inherits = "dev"
-target = "aarch64-unknown-linux-gnu"
-panic = "abort"
 linker-flavor = "ld.lld"
 
 [[bin]]
