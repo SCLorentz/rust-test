@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 bare-metal = "1.0.0"
+exit-no-std = "0.2.1"
 
 [profile.dev]
 panic = "abort"
