@@ -1,1 +1,5 @@
-RUSTFLAGS="-C link-arg=-nostartfiles" cargo run --target x86_64-unknown-linux-gnu
+if [ "$1" = "arm" ]; then
+    RUSTFLAGS="-C link-arg=-nostartfiles" cargo run --profile arm --verbose
+else
+    RUSTFLAGS="-C link-arg=-nostartfiles" cargo run  --release
+fi
