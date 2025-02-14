@@ -5,7 +5,10 @@ edition = "2021"
 
 [dependencies]
 bare-metal = "1.0.0"
-exit-no-std = "0.2.1"
+libc = { version = "0.2.126", default-features = false }
+
+[lints.rust]
+unexpected_cfgs = { level = "allow" }
 
 [profile.dev]
 panic = "abort"

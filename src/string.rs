@@ -7,6 +7,7 @@ impl<'a, const N: usize> String<'a, N>
 {
     pub fn new(context: &'a [u8; N]) -> String<'a, N>
     {
+        //let context: &[u8; N] = ctx.as_bytes();
         String { context }
     }
 
@@ -15,7 +16,6 @@ impl<'a, const N: usize> String<'a, N>
         self.as_bytes().len()
     }
 
-    #[allow(dead_code)]
     pub fn as_bytes(&self) -> &'a [u8]
     {
         self.context
