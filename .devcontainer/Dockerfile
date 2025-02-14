@@ -1,22 +1,12 @@
-FROM ubuntu:22.04
+FROM debian:bookworm
 WORKDIR /app
 
-# install app dependencies
-RUN apt-get update && apt-get install -y build-essential
-RUN apt-get install -y git
+RUN apt-get update && apt-get install -y build-essential git curl \
+    && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-# rust
-RUN apt-get install -y curl
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+COPY cmd/bash /root/bash
+RUN rm -rf ~/.bashrc && mv ~/bash ~/.bashrc
 
-# Settings
-# create bashrc
-RUN touch ~/.bashrc && chmod u+w ~/.bashrc
-# customize bashrc
-COPY cmd/prompt /
-RUN sh -c 'cat /prompt >> ~/.bashrc'
-
-# final configuration
 ENV FLASK_APP=rust_app
 EXPOSE 8000
-CMD flask run --host 0.0.0.0 --port 8000
+ENTRYPOINT flask run --host 0.0.0.0 --port 8000

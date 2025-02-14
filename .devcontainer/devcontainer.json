@@ -14,8 +14,6 @@
         "vscode": {
             "extensions": [
                 "eamodio.gitlens",
-                "seepine.md-editor",
-                "fill-labs.dependi",
                 "rust-lang.rust-analyzer"
             ]
         }
