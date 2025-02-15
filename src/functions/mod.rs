@@ -30,11 +30,10 @@ pub extern "C" fn exit(code: u8) -> !
 {
     unsafe {
         asm!(
-            "mov rax, {code:x}",
-            "mov rdi, rax",
             "mov rax, 60",                      // sys_exit
+            "mov dil, {code}",                  // dil é o registrador de 8 bits que corresponde ao registrador rdi
             "syscall",
-            code = in(reg) code,
+            code = in(reg_byte) code,
             options(noreturn)
         );
     }
