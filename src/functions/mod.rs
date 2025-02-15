@@ -1,12 +1,6 @@
 use crate::String;
 
 use core::arch::asm;
-use libc;
-
-#[cfg(all(not(windows)))]
-pub fn exit(code: u8) -> ! {
-    unsafe { libc::exit(code as u16 as i16 as libc::c_int) }
-}
 
 #[cfg(all(target_arch = "aarch64", target_os = "linux"))]
 pub fn write<const N: usize>(text: String<N>)
@@ -27,6 +21,37 @@ pub fn write<const N: usize>(text: String<N>)
             text_len = in(reg) text_len,
             options(nostack, preserves_flags),
         )
+    }
+}
+
+#[cfg(all(target_arch = "x86_64", target_os = "linux"))]
+#[no_mangle]
+pub extern "C" fn exit(code: u8) -> !
+{
+    unsafe {
+        asm!(
+            "mov rax, {code:x}",
+            "mov rdi, rax",
+            "mov rax, 60",                      // sys_exit
+            "syscall",
+            code = in(reg) code,
+            options(noreturn)
+        );
+    }
+}
+
+#[cfg(all(target_arch = "aarch64", target_os = "linux"))]
+#[no_mangle]
+pub extern "C" fn exit(code: u8) -> !
+{
+    unsafe {
+        asm!(
+            "mov x0, {code:x}",
+            "mov x8, 93",                       // sys_exit
+            "svc #0",
+            code = in(reg) code,
+            options(noreturn)
+        );
     }
 }
 

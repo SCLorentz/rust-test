@@ -1,3 +1,9 @@
+/*pub enum Option<T>
+{
+    None,
+    Some(T)
+}*/
+
 pub struct String<'a, const N: usize>
 {
     pub(crate) context: &'a [u8; N]
@@ -15,7 +21,7 @@ impl<'a, const N: usize> String<'a, N>
         self.as_bytes().len()
     }
 
-    pub fn as_bytes(&self) -> &'a [u8]
+    pub fn as_bytes(&self) -> &'a [u8; N]
     {
         self.context
     }
