@@ -9,7 +9,7 @@ RUN rm -rf ~/.bashrc && mv ~/bash ~/.bashrc
 
 RUN apt-get install wget && BIN="/usr/local/bin" \
     && UPX="${BIN}/upx-4.2.4-arm64_linux.tar.xz" \
-    && wget -O ${UPX} --no-check-certificate https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-amd64_linux.tar.xz \
+    && wget -O ${UPX} --no-check-certificate https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-arm64_linux.tar.xz \
     && tar xf ${UPX} -C ${BIN}
 
 ENV FLASK_APP=rust_app
