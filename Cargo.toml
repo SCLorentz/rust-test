@@ -5,7 +5,6 @@ edition = "2021"
 
 [dependencies]
 bare-metal = "1.0.0"
-libc = { version = "0.2.126", default-features = false }
 
 [lints.rust]
 unexpected_cfgs = { level = "allow" }
@@ -14,6 +13,9 @@ unexpected_cfgs = { level = "allow" }
 panic = "abort"
 codegen-units = 1
 linker-flavor = "ld.lld"
+opt-level = "z"
+strip = true  # Automatically strip symbols from the binary.
+lto = true
 
 [profile.release]
 panic = "abort"

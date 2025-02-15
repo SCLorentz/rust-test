@@ -4,6 +4,7 @@
 #[macro_use]
 mod functions;
 use functions::*;
+use functions::write::write;
 
 mod types;
 use types::*;
@@ -11,7 +12,7 @@ use types::*;
 #[cfg(not(test))]
 #[panic_handler]
 fn panic(_info: &core::panic::PanicInfo) -> ! {
-    exit(1 as u8)
+    exit(1)
 }
 
 #[no_mangle]
