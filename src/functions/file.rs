@@ -1,4 +1,4 @@
-use crate::functions::asm;
+/*use crate::functions::asm;
 
 #[cfg(all(target_arch = "aarch64", target_os = "linux"))]
 pub fn open_file(path: &[u8]) -> usize
@@ -30,8 +30,4 @@ pub fn open_file(path: &[u8]) -> usize { unimplemented!() }
 pub fn open_file(path: &[u8]) -> usize { unimplemented!() }
 
 #[cfg(all(target_arch = "aarch64", target_os = "linux"))]
-#[allow(unused)]
-pub fn read_file(file_descriptor: usize) -> &'static [u8]
-{ 
-    unimplemented!()
-}
+pub fn read_file(file_descriptor: usize) -> &'static [u8] { unimplemented!() }*/

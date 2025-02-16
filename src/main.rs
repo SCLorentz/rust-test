@@ -4,7 +4,7 @@
 #[macro_use]
 mod functions;
 use functions::*;
-use functions::{write::write, file::open_file};
+use functions::write::write;
 
 mod types;
 use types::*;
@@ -26,8 +26,6 @@ pub extern "C" fn _start() -> !
     *                                      *
     ****************************************\n");
     write(msg);
-
-    let path = b"/some/path/to/file";
 
     exit(0)
 }
