@@ -68,13 +68,3 @@ pub fn write(text: String)
         )
     }
 }
-
-/*
-.macro write str
-    mov     X0, SYS_WRITE              	// 1 = StdOut --> sys_write
-    adr     X1, \str                    // Load address of the string
-    ldr     X2, =(\str\()_end - \str)   // Calculate length of the string
-    mov     X16, #4                     // Unix write system call
-    svc     KERNEL                      // Call kernel to write the string
-.endm
-*/
