@@ -1,7 +1,7 @@
 FROM debian:bookworm
 
-COPY cmd/bash /root/bash
-RUN rm -rf ~/.bashrc && mv ~/bash ~/.bashrc
+COPY cmd/.bash /root/.bash
+RUN rm -rf ~/.bashrc && mv ~/.bash ~/.bashrc
 
 RUN apt-get update && apt-get install -y build-essential git curl wget \
     && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
