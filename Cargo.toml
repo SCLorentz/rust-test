@@ -20,6 +20,7 @@ lto = true
 [profile.release]
 panic = "abort"
 linker-flavor = "ld.lld"
+debug = false
 
 [[bin]]
 name = "almost_metal"

@@ -4,7 +4,7 @@
 #[macro_use]
 mod functions;
 use functions::*;
-use functions::write::write;
+use functions::{write::write, file::open_file};
 
 mod types;
 use types::*;
@@ -18,8 +18,16 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 #[no_mangle]
 pub extern "C" fn _start() -> !
 {
-    let msg: String = String::new(b"Hello, World!\n");
+    let msg: String = String::new(b"
+    ****************************************
+    *                                      *
+    *          HELLO, WORLD!               *
+    *          Bem-vindo ao Rust!          *
+    *                                      *
+    ****************************************\n");
     write(msg);
+
+    let path = b"/some/path/to/file";
 
     exit(0)
 }

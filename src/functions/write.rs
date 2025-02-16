@@ -38,7 +38,7 @@ pub fn write(text: String)
             "mov x1, {text_ptr}",               // Load address of the string
             "mov x2, {text_len}",               // Load length of the string
             "mov x8, 64",                       // Unix write system call
-            "svc 0x80",                            // Call kernel to write the string
+            "svc 0x80",                         // Call kernel to write the string
             out("x0") _,
             text_ptr = in(reg) text_ptr,
             text_len = in(reg) text_len,
@@ -59,8 +59,8 @@ pub fn write(text: String)
             "mov x0, 1",                        // 1 = StdOut --> sys_write
             "mov x1, {text_ptr}",               // Load address of the string
             "mov x2, {text_len}",               // Load length of the string
-            "mov x16, #4",                       // Unix write system call
-            "svc 0",                            // Call kernel to write the string
+            "mov x16, #4",                      // Unix write system call
+            "svc 0x80",                         // Call kernel to write the string
             out("x0") _,
             text_ptr = in(reg) text_ptr,
             text_len = in(reg) text_len,
