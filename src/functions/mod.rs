@@ -31,3 +31,18 @@ pub extern "C" fn exit(code: u8) -> !
         );
     }
 }
+
+#[cfg(all(target_arch = "aarch64", target_os = "macos"))]
+#[no_mangle]
+pub extern "C" fn exit(code: u8) -> !
+{
+    unsafe {
+        asm!(
+            "mov x0, {code:x}",
+            "mov x16, #1",                      // sys_exit
+            "svc 0x80",
+            code = in(reg) code,
+            options(noreturn)
+        );
+    }
+}

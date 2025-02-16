@@ -15,8 +15,12 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
     exit(1)
 }
 
+#[used]
 #[no_mangle]
-pub extern "C" fn _start()
+pub static ENTRY: extern "C" fn() -> ! = _start;
+
+#[no_mangle]
+pub extern "C" fn _start() -> !
 {
     let msg: String = String::new(b"Hello, World!\n");
     write(msg);

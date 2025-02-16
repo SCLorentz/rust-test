@@ -26,3 +26,5 @@ function _run()
         echo "Arquitetura não identificada."
     fi
 }
+
+# RUSTFLAGS="-C link-arg=-nostartfiles" cargo build --target aarch64-apple-darwin
