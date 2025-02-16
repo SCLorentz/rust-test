@@ -18,7 +18,7 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 #[no_mangle]
 pub extern "C" fn _start()
 {
-    let msg: String<14> = String::new(b"Hello, World!\n");
+    let msg: String = String::new(b"Hello, World!\n");
     write(msg);
 
     exit(0)

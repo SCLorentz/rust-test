@@ -1,17 +1,11 @@
-/*pub enum Option<T>
+pub struct String<'a>
 {
-    None,
-    Some(T)
-}*/
-
-pub struct String<'a, const N: usize>
-{
-    pub(crate) context: &'a [u8; N]
+    pub(crate) context: &'a [u8]
 }
 
-impl<'a, const N: usize> String<'a, N>
+impl<'a> String<'a>
 {
-    pub fn new(context: &'a [u8; N]) -> String<'a, N>
+    pub fn new(context: &'a [u8]) -> String<'a>
     {
         String { context }
     }
@@ -21,7 +15,7 @@ impl<'a, const N: usize> String<'a, N>
         self.as_bytes().len()
     }
 
-    pub fn as_bytes(&self) -> &'a [u8; N]
+    pub fn as_bytes(&self) -> &'a [u8]
     {
         self.context
     }

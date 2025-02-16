@@ -2,7 +2,7 @@ use crate::String;
 use core::arch::asm;
 
 #[cfg(all(target_arch = "x86_64", target_os = "linux"))]
-pub fn write<const N: usize>(text: String<N>)
+pub fn write(text: String)
 {
     unsafe
     {
@@ -26,7 +26,7 @@ pub fn write<const N: usize>(text: String<N>)
 }
 
 #[cfg(all(target_arch = "aarch64", target_os = "linux"))]
-pub fn write<const N: usize>(text: String<N>)
+pub fn write(text: String)
 {
     unsafe
     {
