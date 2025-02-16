@@ -15,10 +15,6 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
     exit(1)
 }
 
-#[used]
-#[no_mangle]
-pub static ENTRY: extern "C" fn() -> ! = _start;
-
 #[no_mangle]
 pub extern "C" fn _start() -> !
 {
