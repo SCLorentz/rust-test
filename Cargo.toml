@@ -12,16 +12,17 @@ unexpected_cfgs = { level = "allow" }
 [profile.dev]
 panic = "abort"
 codegen-units = 1
-linker-flavor = "ld.lld"
 opt-level = "z"
 strip = true  # Automatically strip symbols from the binary.
 lto = true
 
 [profile.release]
 panic = "abort"
-linker-flavor = "ld.lld"
 debug = false
 
 [[bin]]
 name = "almost_metal"
 path = "src/main.rs"
+
+[build-dependencies]
+cc = "1.0"

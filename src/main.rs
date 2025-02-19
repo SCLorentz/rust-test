@@ -6,9 +6,6 @@ mod functions;
 use functions::*;
 use functions::write::write;
 
-mod types;
-use types::*;
-
 #[cfg(not(test))]
 #[panic_handler]
 fn panic(_info: &core::panic::PanicInfo) -> ! {
@@ -18,13 +15,14 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 #[no_mangle]
 pub extern "C" fn _start() -> !
 {
-    let msg: String = String::new(b"
-    ****************************************
-    *                                      *
-    *          HELLO, WORLD!               *
-    *          Bem-vindo ao Rust!          *
-    *                                      *
-    ****************************************\n");
+    let msg = b"
+    *****************************************************************
+    *                                                               *
+    *          HELLO, WORLD!                                        *
+    *          Thanks to a woman,                                   *
+    *          Kathleen Booth, this code works!                     *
+    *                                                               *
+    *****************************************************************\n";
     write(msg);
 
     exit(0)

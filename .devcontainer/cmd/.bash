@@ -15,11 +15,11 @@ fi
 function _run()
 {
     if [ "$(uname -m)" == "aarch64" ]; then
-        RUSTFLAGS="-C link-arg=-nostartfiles" cargo build --target aarch64-unknown-linux-gnu  
+        cargo build --target aarch64-unknown-linux-gnu
         upx target/aarch64-unknown-linux-gnu/debug/almost_metal -qqq --best
         target/aarch64-unknown-linux-gnu/debug/almost_metal
     elif [ "$(uname -m)" == "x86_64" ]; then
-        RUSTFLAGS="-C link-arg=-nostartfiles" cargo build --target x86_64-unknown-linux-gnu
+        cargo build --target x86_64-unknown-linux-gnu
         upx target/aarch64-unknown-linux-gnu/debug/almost_metal -qqq --best
         target/x86_64-unknown-linux-gnu/debug/almost_metal
     else

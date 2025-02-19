@@ -1,8 +1,7 @@
-use crate::String;
-use core::arch::asm;
+use crate::functions::asm;
 
 #[cfg(all(target_arch = "x86_64", target_os = "linux"))]
-pub fn write(text: String)
+pub fn write(text: &[u8])
 {
     unsafe
     {
@@ -15,7 +14,7 @@ pub fn write(text: String)
             "mov rsi, {msg}",               // Load address of the string
             "mov rdx, {size}",              // Load length of the string
             "syscall",
-            msg = in(reg) text.as_bytes().as_ptr(),
+            msg = in(reg) text.as_ptr(),
             size = in(reg) size,
             out("rax") syscall_ret,
             options(nostack, preserves_flags)
@@ -25,12 +24,24 @@ pub fn write(text: String)
     }
 }
 
+/*#[cfg(all(target_arch = "aarch64", target_os = "linux"))]
+extern "C" 
+{
+    fn write_arm_linux(buf: *const u8, count: usize) -> isize;
+}
+
 #[cfg(all(target_arch = "aarch64", target_os = "linux"))]
-pub fn write(text: String)
+pub fn write(str: &[u8]) -> isize 
+{
+    unsafe { write_arm_linux(str.as_ptr(), str.len()) }
+}*/
+
+#[cfg(all(target_arch = "aarch64", target_os = "linux"))]
+pub fn write(text: &[u8])
 {
     unsafe
     {
-        let text_ptr = text.as_bytes().as_ptr();
+        let text_ptr = text.as_ptr();
         let text_len = text.len() as usize;
 
         asm!(
@@ -48,11 +59,11 @@ pub fn write(text: String)
 }
 
 #[cfg(all(target_arch = "aarch64", target_os = "macos"))]
-pub fn write(text: String)
+pub fn write(text: &[u8])
 {
     unsafe
     {
-        let text_ptr = text.as_bytes().as_ptr();
+        let text_ptr = text.as_ptr();
         let text_len = text.len() as usize;
 
         asm!(
