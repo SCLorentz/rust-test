@@ -3,7 +3,6 @@
 
 #[macro_use]
 mod functions;
-use core::str;
 
 use functions::*;
 use functions::write::write;

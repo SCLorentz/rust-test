@@ -1,5 +1,5 @@
-.equ SYS_WRITE, 64      // syscall número 64 (write)
-.equ STDOUT, 1          // file descriptor 1 para stdout
+.equ SYS_WRITE, 64          // syscall número 64 (write)
+.equ STDOUT, 1              // file descriptor 1 para stdout
 
 .global write_arm_linux
 .type write_arm_linux, %function

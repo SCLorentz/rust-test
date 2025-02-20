@@ -7,7 +7,7 @@ PS1='\[\e[38;5;41m\]\w\[\e[0m\]\\$ '
 if [ "$(uname -m)" == "aarch64" ]; then
     PATH=/usr/local/bin/upx-4.2.4-arm64_linux:$PATH
 elif [ "$(uname -m)" == "x86_64" ]; then
-    PATH=/usr/local/bin/upx-4.2.4-amd64_linux/upx:$PATH
+    PATH=/usr/local/bin/upx-4.2.4-amd64_linux:$PATH
 else
     echo "Arquitetura não identificada."
 fi
