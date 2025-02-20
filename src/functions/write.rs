@@ -79,3 +79,22 @@ pub fn write(text: &[u8])
         )
     }
 }
+
+#[macro_export]
+macro_rules! format
+{
+    ($($arg:expr),*) => {{
+        let mut buffer = [0u8; 256]; // Buffer temporário (ajuste conforme necessário)
+        let mut index = 0;
+
+        $(
+            let bytes = $arg;
+            if index + bytes.len() < buffer.len() {
+                buffer[index..index + bytes.len()].copy_from_slice(bytes);
+                index += bytes.len();
+            }
+        )*
+
+        write(&buffer[..index]);
+    }};
+}

@@ -2,6 +2,8 @@ use core::arch::asm;
 
 pub mod write;
 pub mod file;
+pub mod read;
+pub mod base;
 
 #[cfg(all(target_arch = "x86_64", target_os = "linux"))]
 #[no_mangle]
@@ -47,3 +49,22 @@ pub extern "C" fn exit(code: u8) -> !
         );
     }
 }
+
+/*fn enter_raw_mode()
+{
+    write(b"\x1B[2J\x1B[H");
+    write(b"\x1B[?25l");
+}
+
+fn exit_raw_mode()
+{
+    write(b"\x1B[?25h");
+}
+
+fn sleep(ms: u64)
+{
+    for _ in 0..(ms * 10_000)
+    {
+        core::hint::spin_loop();
+    }
+}*/
