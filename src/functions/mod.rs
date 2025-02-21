@@ -6,7 +6,7 @@ pub mod read;
 pub mod base;
 
 #[cfg(all(target_arch = "x86_64", target_os = "linux"))]
-extern "C" { fn exit_x86_64(code: u8) -> !; }
+extern "C" { fn exit_amdl(code: u8) -> !; }
 
 #[cfg(all(target_arch = "x86_64", target_os = "linux"))]
 pub fn exit(code: u8) -> ! { unsafe { exit_amdl(code) } }

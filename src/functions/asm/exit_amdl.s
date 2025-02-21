@@ -1,5 +1,5 @@
 .global exit_amdl
 exit_amdl:
-    mov rax, 60
-    mov rdi, rdi      ; code here
+    movq %rdi, %rax
+    movq $60, %rax
     syscall
