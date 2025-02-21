@@ -13,17 +13,17 @@ pub fn read(text: &[u8]) -> [u8; 64]
 
     unsafe {
         asm!(
-            "mov x0, 0",                    // 0 = stdin --> sys_read
-            "mov x1, {msg}",                // Load address of the buffer
-            "mov x2, {size}",               // Load size of the buffer
-            "mov x8, 63",                   // Unix read system call number
-            "svc 0",                        // Call kernel to read the string
+            "mov x0, 0",                        // 0 = stdin --> sys_read
+            "mov x1, {msg}",                    // Load address of the buffer
+            "mov x2, {size}",                   // Load size of the buffer
+            "mov x8, 63",                       // Unix read system call number
+            "svc 0",                            // Call kernel to read the string
             msg = in(reg) input.as_mut_ptr(),
             size = in(reg) input.len(),
-            out("x0") _,                    // Mark x0 as clobbered
-            out("x1") _,                    // Mark x1 as clobbered
-            out("x2") _,                    // Mark x2 as clobbered
-            out("x8") _,                    // Mark x8 as clobbered
+            out("x0") _,                        // Mark x0 as clobbered
+            out("x1") _,                        // Mark x1 as clobbered
+            out("x2") _,                        // Mark x2 as clobbered
+            out("x8") _,                        // Mark x8 as clobbered
             options(nostack, preserves_flags)
         );
     }

@@ -24,18 +24,6 @@ pub fn write(text: &[u8])
     }
 }
 
-/*#[cfg(all(target_arch = "aarch64", target_os = "linux"))]
-extern "C" 
-{
-    fn write_arm_linux(buf: *const u8, count: usize) -> isize;
-}
-
-#[cfg(all(target_arch = "aarch64", target_os = "linux"))]
-pub fn write(str: &[u8]) -> isize 
-{
-    unsafe { write_arm_linux(str.as_ptr(), str.len()) }
-}*/
-
 #[cfg(all(target_arch = "aarch64", target_os = "linux"))]
 pub fn write(text: &[u8])
 {

@@ -1,7 +1,6 @@
 use core::arch::asm;
 
 pub mod write;
-pub mod file;
 pub mod read;
 pub mod base;
 
@@ -18,19 +17,10 @@ extern "C" { fn exit_arml(code: u8) -> !; }
 pub fn exit(code: u8) -> ! { unsafe { exit_arml(code) } }
 
 #[cfg(all(target_arch = "aarch64", target_os = "macos"))]
-#[no_mangle]
-pub extern "C" fn exit(code: u8) -> !
-{
-    unsafe {
-        asm!(
-            "mov x0, {code:x}",
-            "mov x16, #1",                      // sys_exit
-            "svc 0x80",
-            code = in(reg) code,
-            options(noreturn)
-        );
-    }
-}
+extern "C" { fn exit_armx(code: u8) -> !; }
+
+#[cfg(all(target_arch = "aarch64", target_os = "macos"))]
+pub fn exit(code: u8) -> ! { unsafe { exit_armx(code) } }
 
 /*fn enter_raw_mode()
 {
