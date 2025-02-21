@@ -6,7 +6,7 @@ mod functions;
 use functions::{exit, write::write};
 
 #[cfg(all(target_arch = "aarch64", target_os = "linux"))]
-use functions::write::read;
+use functions::read::read;
 
 #[panic_handler]
 fn panic(_info: &core::panic::PanicInfo) -> ! { exit(1) }
