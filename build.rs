@@ -4,7 +4,11 @@ fn main()
     
     #[cfg(target_arch = "aarch64")]
     cc::Build::new()
-        //.archiver("llvm-ar")
-        .file("src/functions/asm/write_arm_linux.s")
-        .compile("write_arm_linux");
+        .file("src/functions/asm/exit_arml.s")
+        .compile("exit_arml");
+
+    #[cfg(target_arch = "x86_64")]
+    cc::Build::new()
+        .file("src/functions/asm/exit_amdl.s")
+        .compile("exit_amdl");
 }
