@@ -72,7 +72,7 @@ pub fn write(text: &[u8])
 macro_rules! format
 {
     ($($arg:expr),*) => {{
-        let mut buffer = [0u8; 256]; // Buffer temporário (ajuste conforme necessário)
+        let mut buffer = [0u8; 256];
         let mut index = 0;
 
         $(

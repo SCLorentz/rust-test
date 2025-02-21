@@ -1,7 +1,3 @@
-alias run="cargo run"
-alias ll='ls -la'
-
-# Mudar a cor do prompt (para Bash, usando cores ANSI)
 PS1='\[\e[38;5;41m\]\w\[\e[0m\]\\$ '
 
 if [ "$(uname -m)" == "aarch64" ]; then
@@ -12,7 +8,7 @@ else
     echo "Arquitetura não identificada."
 fi
 
-function _run()
+function run()
 {
     if [ "$(uname -m)" == "aarch64" ]; then
         cargo build --target aarch64-unknown-linux-gnu
