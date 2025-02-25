@@ -4,7 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-bare-metal = "1.0.0"
 
 [lints.rust]
 unexpected_cfgs = { level = "allow" }
@@ -19,6 +18,8 @@ lto = true
 [profile.release]
 panic = "abort"
 debug = false
+opt-level = "z"
+lto = true
 
 [[bin]]
 name = "almost_metal"
