@@ -8,6 +8,7 @@ fn main()
     {
         targets.push(("exit_arml", "src/functions/core/exit_arml.s"));
         targets.push(("write_arml", "src/functions/core/write_arml.s"));
+        targets.push(("read_arml", "src/functions/core/read_arml.s"));
     }
 
     #[cfg(all(target_arch = "x86_64", target_os = "linux"))]

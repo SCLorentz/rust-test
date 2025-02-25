@@ -1,2 +1,2 @@
 [build]
-rustflags = ["-C", "link-arg=-nostartfiles"]
+rustflags = ["-C", "link-arg=-nostartfiles", "-C", "strip=symbols", "-C", "target-cpu=native"]
