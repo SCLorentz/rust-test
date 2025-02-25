@@ -2,18 +2,31 @@ fn main()
 {
     println!("cargo:rerun-if-changed=build.rs");
     
+    let mut targets = Vec::new();
+
     #[cfg(all(target_arch = "aarch64", target_os = "linux"))]
-    cc::Build::new()
-        .file("src/functions/core/exit_arml.s")
-        .compile("exit_arml");
+    {
+        targets.push(("exit_arml", "src/functions/core/exit_arml.s"));
+        targets.push(("write_arml", "src/functions/core/write_arml.s"));
+    }
 
     #[cfg(all(target_arch = "x86_64", target_os = "linux"))]
-    cc::Build::new()
-        .file("src/functions/core/exit_amdl.s")
-        .compile("exit_amdl");
+    {
+        targets.push(("exit_amdl", "src/functions/core/exit_amdl.s"));
+        // TODO: (possible problem) review this file:
+        targets.push(("write_amdl", "src/functions/core/write_amdl.s"));
+    }
 
     #[cfg(all(target_arch = "aarch64", target_os = "macos"))]
-    cc::Build::new()
-        .file("src/functions/core/exit_armx.s")
-        .compile("exit_armx");
+    {
+        targets.push(("exit_armx", "src/functions/core/exit_armx.s"));
+        targets.push(("write_armx", "src/functions/core/write_armx.s"));
+    }
+
+    for (name, file) in targets
+    {
+        cc::Build::new()
+            .file(file)
+            .compile(name);
+    }
 }
